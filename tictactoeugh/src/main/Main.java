@@ -1,8 +1,116 @@
 package main;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private static final String ANSI_RESET = "\u001B[0m";
+
+    public static void main(String[] args) {
+        Board board = new Board(3);
+        Player[] players = new Player[2];
+
+        players[0] = new Player("X"); // change later
+        players[1] = new Player("O"); // change later
+
+        int foundWinner = 0;
+
+        mainMenu(players);
+
+        board.printBoard();
+
+        int i=0;
+        while(i<9)
+        {
+            if(i%2==0) //Player 1
+            {
+                if(getWinner("Player 1 turn", board, players[0]))
+                {
+                    foundWinner=1;
+                    System.out.println("Player 1 WINS!");
+                    break;
+                }
+                board.printBoard();
+                System.out.println();
+            }
+            else //Player 2
+            {
+                if(getWinner("Player 2 turn", board, players[1]))
+                {
+                    foundWinner=1;
+                    System.out.println("Player 2 WINS!");
+                    break;
+                }
+                board.printBoard();
+                System.out.println();
+            }
+            i++;
+        }
+
+        if(foundWinner == 0)
+            System.out.println("It's a draw!");
+
+    }
+
+    public static void mainMenu(Player[] players) {
+        System.out.println("Welcome to Tic Tac Toe.");
+
+        final String ANSI_BLACK = "\u001B[30m";
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_YELLOW = "\u001B[33m";
+        final String ANSI_BLUE = "\u001B[34m";
+        final String ANSI_PURPLE = "\u001B[35m";
+        final String ANSI_CYAN = "\u001B[36m";
+        final String ANSI_WHITE = "\u001B[37m";
+
+        for(int i = 0; i < players.length; i++) {
+            boolean finished = false;
+            while (!finished) {
+                System.out.println("Player " + (i+1) + ": Choose your colour.");
+                System.out.println("1 - " + ANSI_BLACK + "Black" + ANSI_RESET);
+                System.out.println("2 - " + ANSI_RED + "Red" + ANSI_RESET);
+                System.out.println("3 - " + ANSI_GREEN + "Green" + ANSI_RESET);
+                System.out.println("4 - " + ANSI_YELLOW + "Yellow" + ANSI_RESET);
+                System.out.println("5 - " + ANSI_BLUE + "Blue" + ANSI_RESET);
+                System.out.println("6 - " + ANSI_PURPLE + "Purple" + ANSI_RESET);
+                System.out.println("7 - " + ANSI_CYAN + "Cyan" + ANSI_RESET);
+                System.out.println("8 - " + ANSI_WHITE + "White" + ANSI_RESET);
+
+                Scanner scanner = new Scanner(System.in);
+                int input = scanner.nextInt();
+                if(input > 0 && input < 9) {
+                    switch(input) {
+                        case 1:
+                            players[i].setColour(ANSI_BLACK);
+                            break;
+                        case 2:
+                            players[i].setColour(ANSI_RED);
+                            break;
+                        case 3:
+                            players[i].setColour(ANSI_GREEN);
+                            break;
+                        case 4:
+                            players[i].setColour(ANSI_YELLOW);
+                            break;
+                        case 5:
+                            players[i].setColour(ANSI_BLUE);
+                            break;
+                        case 6:
+                            players[i].setColour(ANSI_PURPLE);
+                            break;
+                        case 7:
+                            players[i].setColour(ANSI_CYAN);
+                            break;
+                        case 8:
+                            players[i].setColour(ANSI_WHITE);
+                            break;
+                    }
+                    finished = true;
+                }
+            }
+        }
+    }
 
     public static int getValidInt(String prompt) {
 
@@ -30,131 +138,24 @@ public class Main {
         }
     }
 
-    public static boolean checkRows(String[][] A){
-        for(int i=0; i<A.length; i++)
-        {
-            if( (A[i][0]==A[i][1]) && (A[i][1]==A[i][2]) && A[i][0] !=null)
-                return true;
-        }
-        return false;
-    }
 
-    public static boolean checkCols(String[][] A){
-        for(int i=0; i<A[0].length; i++)
-        {
-            if( (A[0][i]==A[1][i]) && (A[1][i]==A[1][i])&& A[0][i] !=null)
-                return true;
-        }
-        return false;
-    }
-
-    public static boolean checkDiags(String[][] A){
-        if( (A[0][0]==A[1][1]) && (A[1][1]==A[2][2]) && A[0][0] !=null)
-            return true;
-        else if ((A[0][2]==A[1][1]) && (A[1][1]==A[2][0]) && A[1][1] !=null)
-            return true;
-        else
-            return false;
-    }
-
-    public static boolean checkHit(String[][] A) {
-
-        if(checkRows(A) || checkCols(A) || checkDiags(A))
-            return true;
-        else
-            return false;
-    }
-
-    public static boolean isFree (String[][] A, int row, int col) {
-        if(A[row][col] == null)
-            return true;
-        else
-            return false;
-    }
-
-    public static boolean getWinner(String turnPrompt, String[][] A, String playerString) {
+    public static boolean getWinner(String turnPrompt, Board board, Player player) {
         System.out.println(turnPrompt);
         int row=0, col=0;
         while(true)
         {
             row = getValidInt("Enter row: ");
             col = getValidInt("Enter col: ");
-            if(isFree(A,row,col))
+            if(board.isFree(row,col))
             {
                 break;
             }
             System.out.printf("[%d,%d] is already filled!\n",row,col);
         }
-        A[row][col] = playerString;
-        return checkHit(A);
+        board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
+        return board.checkHit();
     }
 
-
-    public static void printBoard(String[][] A) {
-
-        System.out.println("-------------");
-
-
-        for (int i = 0; i < 3; i++) {
-
-            System.out.print("| ");
-
-            for (int j = 0; j < 3; j++) {
-                if (A[i][j] == null){
-                    System.out.print("-" + " | ");
-                }else {
-                    System.out.print(A[i][j] + " | ");
-                }
-            }
-
-            System.out.println();
-
-            System.out.println("-------------");
-
-        }
-
-    }
-
-
-    public static void main(String[] args) {
-
-        String[][] grid = new String[3][3];
-        int foundWinner = 0;
-
-        printBoard(grid);
-
-        int i=0;
-        while(i<9)
-        {
-            if(i%2==0) //Player 1
-            {
-                if(getWinner("Player 1 turn",grid,"X"))
-                {
-                    foundWinner=1;
-                    System.out.println("Player 1 WINS!");
-                    break;
-                }
-                printBoard(grid);
-                System.out.println();
-            }
-            else //Player 2
-            {
-                if(getWinner("Player 2 turn",grid,"O"))
-                {
-                    foundWinner=1;
-                    System.out.println("Player 2 WINS!");
-                    break;
-                }
-                printBoard(grid);
-                System.out.println();
-            }
-            i++;
-        }
-
-        if(foundWinner == 0)
-            System.out.println("It's a draw!");
-
-    }//end main
-}//end class
+}
 
 

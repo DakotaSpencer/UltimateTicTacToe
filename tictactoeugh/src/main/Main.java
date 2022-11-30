@@ -30,34 +30,34 @@ public class Main {
         }
     }
 
-    public static boolean checkRows(int[][] A){
+    public static boolean checkRows(String[][] A){
         for(int i=0; i<A.length; i++)
         {
-            if( (A[i][0]==A[i][1]) && (A[i][1]==A[i][2]) && A[i][0] !=0)
+            if( (A[i][0]==A[i][1]) && (A[i][1]==A[i][2]) && A[i][0] !=null)
                 return true;
         }
         return false;
     }
 
-    public static boolean checkCols(int[][] A){
+    public static boolean checkCols(String[][] A){
         for(int i=0; i<A[0].length; i++)
         {
-            if( (A[0][i]==A[1][i]) && (A[1][i]==A[1][i])&& A[0][i] !=0)
+            if( (A[0][i]==A[1][i]) && (A[1][i]==A[1][i])&& A[0][i] !=null)
                 return true;
         }
         return false;
     }
 
-    public static boolean checkDiags(int[][] A){
-        if( (A[0][0]==A[1][1]) && (A[1][1]==A[2][2]) && A[0][0] !=0)
+    public static boolean checkDiags(String[][] A){
+        if( (A[0][0]==A[1][1]) && (A[1][1]==A[2][2]) && A[0][0] !=null)
             return true;
-        else if ((A[0][2]==A[1][1]) && (A[1][1]==A[2][0]) && A[1][1] !=0)
+        else if ((A[0][2]==A[1][1]) && (A[1][1]==A[2][0]) && A[1][1] !=null)
             return true;
         else
             return false;
     }
 
-    public static boolean checkHit(int[][] A) {
+    public static boolean checkHit(String[][] A) {
 
         if(checkRows(A) || checkCols(A) || checkDiags(A))
             return true;
@@ -65,14 +65,14 @@ public class Main {
             return false;
     }
 
-    public static boolean isFree (int[][] A, int row, int col) {
-        if(A[row][col] == 0)
+    public static boolean isFree (String[][] A, int row, int col) {
+        if(A[row][col] == null)
             return true;
         else
             return false;
     }
 
-    public static boolean getWinner(String turnPrompt, int[][] A, int playerNumber) {
+    public static boolean getWinner(String turnPrompt, String[][] A, String playerString) {
         System.out.println(turnPrompt);
         int row=0, col=0;
         while(true)
@@ -85,12 +85,12 @@ public class Main {
             }
             System.out.printf("[%d,%d] is already filled!\n",row,col);
         }
-        A[row][col] = playerNumber;
+        A[row][col] = playerString;
         return checkHit(A);
     }
 
 
-    public static void printBoard(int[][] A) {
+    public static void printBoard(String[][] A) {
 
         System.out.println("-------------");
 
@@ -100,9 +100,11 @@ public class Main {
             System.out.print("| ");
 
             for (int j = 0; j < 3; j++) {
-
-                System.out.print(A[i][j] + " | ");
-
+                if (A[i][j] == null){
+                    System.out.print("-" + " | ");
+                }else {
+                    System.out.print(A[i][j] + " | ");
+                }
             }
 
             System.out.println();
@@ -116,7 +118,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int[][] grid = new int[3][3];
+        String[][] grid = new String[3][3];
         int foundWinner = 0;
 
         printBoard(grid);
@@ -126,7 +128,7 @@ public class Main {
         {
             if(i%2==0) //Player 1
             {
-                if(getWinner("Player 1 turn",grid,1))
+                if(getWinner("Player 1 turn",grid,"X"))
                 {
                     foundWinner=1;
                     System.out.println("Player 1 WINS!");
@@ -137,7 +139,7 @@ public class Main {
             }
             else //Player 2
             {
-                if(getWinner("Player 2 turn",grid,2))
+                if(getWinner("Player 2 turn",grid,"O"))
                 {
                     foundWinner=1;
                     System.out.println("Player 2 WINS!");

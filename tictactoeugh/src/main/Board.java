@@ -77,21 +77,9 @@ public class Board {
             return false;
     }
 
-    public int getDimensions() {
-        return Dimensions;
-    }
-
     public void setDimensions(int dimensions) {
         Dimensions = dimensions;
         Grid = new String[dimensions][dimensions];
-    }
-
-    public String[][] getGrid() {
-        return Grid;
-    }
-
-    public String getGridSquare(int row, int col) {
-        return Grid[row][col];
     }
 
     public void setGridSquare(int row, int col, String set) {

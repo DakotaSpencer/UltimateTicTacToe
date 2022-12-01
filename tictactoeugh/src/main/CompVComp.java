@@ -57,10 +57,7 @@ public class CompVComp {
 
         if(foundWinner == 0)
             System.out.println("It's a draw!");
-
     }
-
-
 
     public static void colorMenu(Player @NotNull [] players) {
         System.out.println("Welcome to Tic Tac Toe.");

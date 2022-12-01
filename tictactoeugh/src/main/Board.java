@@ -42,7 +42,7 @@ public class Board {
             System.out.println("0," + i + " : "+Grid[0][i]);
             System.out.println("1," + i + " : "+Grid[1][i]);
             System.out.println("2," + i + " : "+Grid[2][i]);
-            if( (Grid[0][i]==Grid[1][i]) && (Grid[1][i]==Grid[1][i])&& Grid[0][i] !=null)
+            if( (Grid[0][i]==Grid[1][i]) && (Grid[1][i]==Grid[2][i])&& Grid[0][i] !=null)
                 return true;
         }
         return false;

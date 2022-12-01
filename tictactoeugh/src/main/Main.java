@@ -1,5 +1,7 @@
 package main;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -52,7 +54,7 @@ public class Main {
 
     }
 
-    public static void mainMenu(Player[] players) {
+    public static void mainMenu(Player @NotNull [] players) {
         System.out.println("Welcome to Tic Tac Toe.");
 
         final String ANSI_BLACK = "\u001B[30m";
@@ -78,6 +80,7 @@ public class Main {
                 System.out.println("8 - " + ANSI_WHITE + "White" + ANSI_RESET);
 
                 Scanner scanner = new Scanner(System.in);
+                System.out.println("Color:");
                 int input = scanner.nextInt();
                 if(input > 0 && input < 9) {
                     switch(input) {

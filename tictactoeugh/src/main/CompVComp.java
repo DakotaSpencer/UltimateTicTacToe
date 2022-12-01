@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.Scanner;
 
-public class PlayerVComputer {
+public class CompVComp {
     private static final String ANSI_RESET = "\u001B[0m";
 
     public static int rng(int bound){

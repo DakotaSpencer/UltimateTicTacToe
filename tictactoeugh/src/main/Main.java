@@ -2,7 +2,6 @@ package main;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -134,7 +133,7 @@ public class Main {
                     mainMenu(players);
                     break;
                 case 3:
-                    PlayerVComputer.main();
+                    CompVComp.main();
                     System.out.println("Game is over! Exiting app...");
                     System.exit(1);
                     break;

@@ -25,6 +25,10 @@ public class Board {
     public boolean checkRows() {
         for(int i=0; i<Dimensions; i++)
         {
+            System.out.println("CheckRows Checks:");
+            System.out.println(i +",0" +  " : "+Grid[i][0]);
+            System.out.println(i +",1" +  " : "+Grid[i][1]);
+            System.out.println(i +",2" +  " : "+Grid[i][2]);
             if( (Grid[i][0]==Grid[i][1]) && (Grid[i][1]==Grid[i][2]) && Grid[i][0] !=null)
                 return true;
         }
@@ -34,6 +38,10 @@ public class Board {
     public boolean checkCols() {
         for(int i=0; i<Dimensions; i++)
         {
+            System.out.println("CheckCols Checks:");
+            System.out.println("0," + i + " : "+Grid[0][i]);
+            System.out.println("1," + i + " : "+Grid[1][i]);
+            System.out.println("2," + i + " : "+Grid[2][i]);
             if( (Grid[0][i]==Grid[1][i]) && (Grid[1][i]==Grid[1][i])&& Grid[0][i] !=null)
                 return true;
         }
@@ -41,6 +49,11 @@ public class Board {
     }
 
     public boolean checkDiags(){
+        System.out.println("CheckDiags Checks:");
+        System.out.println("0,0: " + Grid[0][0]);
+        System.out.println("1,1: " + Grid[1][1]);
+        System.out.println("2,2: " + Grid[2][2]);
+
         if( (Grid[0][0]==Grid[1][1]) && (Grid[1][1]==Grid[2][2]) && Grid[0][0] !=null)
             return true;
         else if ((Grid[0][2]==Grid[1][1]) && (Grid[1][1]==Grid[2][0]) && Grid[1][1] !=null)

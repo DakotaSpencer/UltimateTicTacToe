@@ -1,7 +1,5 @@
 package main;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -54,7 +52,7 @@ public class Main {
 
     }
 
-    public static void mainMenu(Player @NotNull [] players) {
+    public static void mainMenu(Player [] players) {
         System.out.println("Welcome to Tic Tac Toe.");
 
         Random rng = new Random();

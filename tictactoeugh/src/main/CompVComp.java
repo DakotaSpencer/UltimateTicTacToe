@@ -1,7 +1,5 @@
 package main;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -59,7 +57,7 @@ public class CompVComp {
             System.out.println("It's a draw!");
     }
 
-    public static void colorMenu(Player @NotNull [] players) {
+    public static void colorMenu(Player [] players) {
         System.out.println("COMPUTER VS COMPUTER");
 
         final String ANSI_RED = "\u001B[31m";

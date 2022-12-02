@@ -63,7 +63,7 @@ public class PlayerVComp {
     }
 
     public static void colorMenu(Player @NotNull [] players) {
-        System.out.println("Welcome to Tic Tac Toe.");
+        System.out.println("PLAYER VS COMPUTER");
 
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_BLUE = "\u001B[34m";

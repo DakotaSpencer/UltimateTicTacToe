@@ -8,7 +8,7 @@ public class Board {
     }
 
     public void printBoard() {
-        System.out.println("-------------");
+//        System.out.println("-------------");
         for (int i = 0; i < Dimensions; i++) {
             System.out.print("| ");
 
@@ -19,7 +19,8 @@ public class Board {
                     System.out.print(Grid[i][j] + " | ");
                 }
             }
-            System.out.println("\n-------------");
+            //System.out.println("\n-------------");
+            System.out.println("\n");
         }
     }
     public boolean checkRows() {

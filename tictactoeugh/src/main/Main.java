@@ -129,8 +129,9 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.println("Not Yet Implemented");
-                    mainMenu(players);
+                    PlayerVComp.main();
+                    System.out.println("Game is over! Exiting app...");
+                    System.exit(1);
                     break;
                 case 3:
                     CompVComp.main();
@@ -184,7 +185,6 @@ public class Main {
         board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
         return board.checkHit();
     }
-
 }
 
 

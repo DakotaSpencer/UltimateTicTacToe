@@ -55,9 +55,9 @@ public class Main {
     public static void mainMenu(Player [] players) {
         System.out.println("Welcome to Tic Tac Toe.");
 
-        Random rng = new Random();
-        int num1 = rng.nextInt(10) + 1;
-        System.out.println(num1);
+        //Random rng = new Random();
+        //int num1 = rng.nextInt(10) + 1;
+        //System.out.println(num1);
 
         final String ANSI_BLACK = "\u001B[30m";
         final String ANSI_RED = "\u001B[31m";
@@ -127,12 +127,14 @@ public class Main {
                     }
                     break;
                 case 2:
-                    PlayerVComp.main();
+                    PlayerVComp runner = new PlayerVComp();
+                    runner.main();
                     System.out.println("Game is over! Exiting app...");
                     System.exit(1);
                     break;
                 case 3:
-                    CompVComp.main();
+                    CompVComp compRunner = new CompVComp();
+                    compRunner.main();
                     System.out.println("Game is over! Exiting app...");
                     System.exit(1);
                     break;

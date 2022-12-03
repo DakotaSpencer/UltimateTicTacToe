@@ -3,6 +3,7 @@ package main;
 public class Board {
     private int Dimensions;
     private String[][] Grid;
+
     public Board(int dimensions) {
         setDimensions(dimensions);
     }

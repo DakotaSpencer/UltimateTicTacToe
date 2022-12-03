@@ -61,6 +61,7 @@ public class PlayerVComp {
     }
 
     public static void colorMenu(Player [] players) {
+        System.out.println("TEST PLAYER V COMP");
         System.out.println("PLAYER VS COMPUTER");
 
         final String ANSI_RED = "\u001B[31m";

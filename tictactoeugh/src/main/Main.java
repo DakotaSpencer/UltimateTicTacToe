@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+    public static int dims;
     private static final String ANSI_RESET = "\u001B[0m";
 
     public static void main(String[] args) {
@@ -18,9 +19,11 @@ public class Main {
         mainMenu(players, board);
 
         board.printBoard();
+        System.out.println(board.getDims()*board.getDims());
 
         int i=0;
-        while(i<9)
+        while(i<board.getDims()*board.getDims())
+        //while(i<9)
         {
             if(i%2==0) //Player 1
             {
@@ -91,7 +94,7 @@ public class Main {
     }
 
     public static void boardMenu(Board board) {
-        int dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.", 10, 3);
+        dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.", 10, 3);
         board.setDimensions(dims);
     }
 
@@ -225,6 +228,7 @@ public class Main {
             System.out.printf("[%d,%d] is already filled!\n",row,col);
         }
         board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
+        //return board.checkHit(player.getMarker());
         return board.checkHit();
     }
 }

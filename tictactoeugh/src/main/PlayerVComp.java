@@ -15,7 +15,7 @@ public class PlayerVComp {
         return num1;
     }
     public static void main() {
-        Board board = new Board(3);
+        Board board = new Board(Main.dims);
         Player[] players = new Player[2];
 
         players[0] = new Player("X"); // change later
@@ -28,7 +28,8 @@ public class PlayerVComp {
         board.printBoard();
 
         int i=0;
-        while(i<9)
+        while(i<board.getDims()*board.getDims())
+        //while(i<9)
         {
             if(i%2==0) //Player 1
             {
@@ -81,7 +82,7 @@ public class PlayerVComp {
             if (!comp){
                 input = in.nextLine();
             }else{
-                input = String.valueOf(rng(3));
+                input = String.valueOf(rng(max));
             }
 
             int num=0;
@@ -118,6 +119,7 @@ public class PlayerVComp {
             System.out.printf("[%d,%d] is already filled!\n",row,col);
         }
         board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
+        //return board.checkHit(player.getMarker());
         return board.checkHit();
     }
 }

@@ -64,8 +64,27 @@ public class Board {
             return false;
     }
 
-    public boolean checkHit() {
+    //NEW METHOD
+//    public boolean checkHit(String symbol) {
+//        if ((Grid[0][0] == symbol && Grid [0][1] == symbol && Grid [0][2] == symbol) ||
+//                (Grid[1][0] == symbol && Grid [1][1] == symbol && Grid [1][2] == symbol) ||
+//                (Grid[2][0] == symbol && Grid [2][1] == symbol && Grid [2][2] == symbol) ||
+//
+//                (Grid[0][0] == symbol && Grid [1][0] == symbol && Grid [2][0] == symbol) ||
+//                (Grid[0][1] == symbol && Grid [1][1] == symbol && Grid [2][1] == symbol) ||
+//                (Grid[0][2] == symbol && Grid [1][2] == symbol && Grid [2][2] == symbol) ||
+//
+//                (Grid[0][0] == symbol && Grid [1][1] == symbol && Grid [2][2] == symbol) ||
+//                (Grid[0][2] == symbol && Grid [1][1] == symbol && Grid [2][0] == symbol) ) {
+//            System.out.println("Player " + symbol + " wins!");
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }
 
+    //OLD METHOD
+    public boolean checkHit() {
         if(checkRows() || checkCols() || checkDiags())
             return true;
         else

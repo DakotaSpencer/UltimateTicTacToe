@@ -14,7 +14,7 @@ public class CompVComp {
         return num1;
     }
     public static void main() {
-        Board board = new Board(3);
+        Board board = new Board(Main.dims);
         Player[] players = new Player[2];
 
         players[0] = new Player("X"); // change later
@@ -22,10 +22,13 @@ public class CompVComp {
 
         int foundWinner = 0;
 
+        colorMenu(players);
+
         board.printBoard();
 
         int i=0;
-        while(i<9)
+        while(i<board.getDims()*board.getDims())
+        //while(i<9)
         {
             if(i%2==0) //Player 1
             {
@@ -67,12 +70,12 @@ public class CompVComp {
     }
 
     public static int getValidInt(String prompt, int max, int min) {
-
-        Scanner in = new Scanner(System.in);
         while(true)
         {
             System.out.print(prompt);
-            String input = in.nextLine();
+
+            String input = String.valueOf(rng(max));
+
             int num=0;
             try
             {
@@ -83,7 +86,7 @@ public class CompVComp {
                 System.out.println("Invalid integer!");
                 continue;
             }
-            if(num<0 || num>2)
+            if(num<min || num>max)
             {
                 System.out.println("Integer must be between " + min + " and " + max + ".");
                 continue;
@@ -99,7 +102,7 @@ public class CompVComp {
         while(true)
         {
             row = getValidInt("Enter row: ", board.getDims(), 0);
-            col = getValidInt("Enter row: ", board.getDims(), 0);
+            col = getValidInt("Enter col: ", board.getDims(), 0);
             if(board.isFree(row,col))
             {
                 break;
@@ -107,6 +110,7 @@ public class CompVComp {
             System.out.printf("[%d,%d] is already filled!\n",row,col);
         }
         board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
+        //return board.checkHit(player.getMarker());
         return board.checkHit();
     }
 }

@@ -110,7 +110,7 @@ public class PlayerVComp {
         while(true)
         {
             row = getValidInt("Enter row: ");
-            col = getValidInt("Enter row: ");
+            col = getValidInt("Enter col: ");
             if(board.isFree(row,col))
             {
                 break;

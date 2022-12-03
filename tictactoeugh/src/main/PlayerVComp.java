@@ -71,7 +71,7 @@ public class PlayerVComp {
         players[1].setColour(ANSI_BLUE);
     }
 
-    public static int getValidInt(String prompt) {
+    public static int getValidInt(String prompt, int max, int min) {
 
         Scanner in = new Scanner(System.in);
         while(true)
@@ -94,9 +94,9 @@ public class PlayerVComp {
                 System.out.println("Invalid integer!");
                 continue;
             }
-            if(num<0 || num>2)
+            if(num<min || num>max)
             {
-                System.out.println("Integer must be between 0 and 2");
+                System.out.println("Integer must be between " + min + " and " + max + ".");
                 continue;
             }
             return num;
@@ -109,8 +109,8 @@ public class PlayerVComp {
         int row=0, col=0;
         while(true)
         {
-            row = getValidInt("Enter row: ");
-            col = getValidInt("Enter col: ");
+            row = getValidInt("Enter row: ", board.getDims(), 0);
+            col = getValidInt("Enter col: ", board.getDims(), 0);
             if(board.isFree(row,col))
             {
                 break;

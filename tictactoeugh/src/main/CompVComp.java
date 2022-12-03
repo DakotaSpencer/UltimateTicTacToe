@@ -22,8 +22,6 @@ public class CompVComp {
 
         int foundWinner = 0;
 
-        colorMenu(players);
-
         board.printBoard();
 
         int i=0;
@@ -68,14 +66,13 @@ public class CompVComp {
         players[1].setColour(ANSI_BLUE);
     }
 
-    public static int getValidInt(String prompt) {
+    public static int getValidInt(String prompt, int max, int min) {
 
         Scanner in = new Scanner(System.in);
         while(true)
         {
             System.out.print(prompt);
-            //String input = in.nextLine();
-            String input = String.valueOf(rng(3));
+            String input = in.nextLine();
             int num=0;
             try
             {
@@ -88,7 +85,7 @@ public class CompVComp {
             }
             if(num<0 || num>2)
             {
-                System.out.println("Integer must be between 0 and 2");
+                System.out.println("Integer must be between " + min + " and " + max + ".");
                 continue;
             }
             return num;
@@ -101,8 +98,8 @@ public class CompVComp {
         int row=0, col=0;
         while(true)
         {
-            row = getValidInt("Enter row: ");
-            col = getValidInt("Enter row: ");
+            row = getValidInt("Enter row: ", board.getDims(), 0);
+            col = getValidInt("Enter row: ", board.getDims(), 0);
             if(board.isFree(row,col))
             {
                 break;

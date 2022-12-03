@@ -15,7 +15,7 @@ public class Main {
 
         int foundWinner = 0;
 
-        mainMenu(players);
+        mainMenu(players, board);
 
         board.printBoard();
 
@@ -52,8 +52,9 @@ public class Main {
 
     }
 
-    public static void mainMenu(Player [] players) {
+    public static void mainMenu(Player [] players, Board board) {
         System.out.println("Welcome to Tic Tac Toe.");
+        boardMenu(board);
 
         //Random rng = new Random();
         //int num1 = rng.nextInt(10) + 1;
@@ -87,6 +88,11 @@ public class Main {
                     break;
             }
         }
+    }
+
+    public static void boardMenu(Board board) {
+        int dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.", 10, 3);
+        board.setDimensions(dims);
     }
 
     public static void chooseColour(Player[] players, int times) {
@@ -178,7 +184,7 @@ public class Main {
         }
     }
 
-    public static int getValidInt(String prompt) {
+    public static int getValidInt(String prompt, int max, int min) {
 
         Scanner in = new Scanner(System.in);
         while(true)
@@ -195,9 +201,9 @@ public class Main {
                 System.out.println("Invalid integer!");
                 continue;
             }
-            if(num<0 || num>2)
+            if(num<min || num>max)
             {
-                System.out.println("Integer must be between 0 and 2");
+                System.out.println("Integer must be between " + min + " and " + max + ".");
                 continue;
             }
             return num;
@@ -210,8 +216,8 @@ public class Main {
         int row=0, col=0;
         while(true)
         {
-            row = getValidInt("Enter row: ");
-            col = getValidInt("Enter col: ");
+            row = getValidInt("Enter row: ", board.getDims(), 0);
+            col = getValidInt("Enter col: ", board.getDims(), 0);
             if(board.isFree(row,col))
             {
                 break;

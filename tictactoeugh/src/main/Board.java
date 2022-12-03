@@ -84,6 +84,10 @@ public class Board {
         Grid = new String[dimensions][dimensions];
     }
 
+    public int getDims() {
+        return Dimensions;
+    }
+
     public void setGridSquare(int row, int col, String set) {
         Grid[row][col] = set;
     }

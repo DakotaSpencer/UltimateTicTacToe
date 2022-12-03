@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class CompVComp {
+    public CompVComp() {}
     private static final String ANSI_RESET = "\u001B[0m";
 
     public static int rng(int bound){

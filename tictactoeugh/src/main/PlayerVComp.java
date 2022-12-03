@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class PlayerVComp {
+    public PlayerVComp() {}
     private static final String ANSI_RESET = "\u001B[0m";
     public static boolean comp = false;
 

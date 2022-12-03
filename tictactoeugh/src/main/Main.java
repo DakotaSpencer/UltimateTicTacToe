@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class Main {
     public static int dims;
     private static final String ANSI_RESET = "\u001B[0m";
-
+    public static String playerSym = null;
     public static void main(String[] args) {
-        Board board = new Board(3);
+        Board board = new Board(dims);
         Player[] players = new Player[2];
 
         players[0] = new Player("X"); // change later
@@ -27,6 +27,7 @@ public class Main {
         {
             if(i%2==0) //Player 1
             {
+                playerSym="X";
                 if(getWinner("Player 1 turn", board, players[0]))
                 {
                     foundWinner=1;
@@ -38,6 +39,7 @@ public class Main {
             }
             else //Player 2
             {
+                playerSym="O";
                 if(getWinner("Player 2 turn", board, players[1]))
                 {
                     foundWinner=1;

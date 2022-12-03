@@ -23,19 +23,17 @@ public class Board {
             System.out.println("\n");
         }
     }
-
     public boolean checkRows() {
-        for(int i=0; i<Dimensions; i++) {
-            String intendedTarget = Grid[i][0];
-            if (intendedTarget != null) {
-                for (int j = 0; j < Dimensions - 1; j++) {
-                    if (Grid[i][j] != intendedTarget) {
-                        return false;
-                    }
-                }
-            }
+        for(int i=0; i<Dimensions; i++)
+        {
+//            System.out.println("CheckRows Checks:");
+//            System.out.println(i +",0" +  " : "+Grid[i][0]);
+//            System.out.println(i +",1" +  " : "+Grid[i][1]);
+//            System.out.println(i +",2" +  " : "+Grid[i][2]);
+            if( (Grid[i][0]==Grid[i][1]) && (Grid[i][1]==Grid[i][2]) && Grid[i][0] !=null)
+                return true;
         }
-        return true;
+        return false;
     }
 
     public boolean checkCols() {
@@ -83,10 +81,6 @@ public class Board {
     public void setDimensions(int dimensions) {
         Dimensions = dimensions;
         Grid = new String[dimensions][dimensions];
-    }
-
-    public int getDimensions() {
-        return this.Dimensions;
     }
 
     public void setGridSquare(int row, int col, String set) {

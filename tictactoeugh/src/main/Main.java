@@ -20,7 +20,7 @@ public class Main {
         board.printBoard();
 
         int i=0;
-        while(i<(board.getDimensions()*board.getDimensions()))
+        while(i<9)
         {
             if(i%2==0) //Player 1
             {

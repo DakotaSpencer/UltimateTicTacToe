@@ -1,22 +1,18 @@
 package main;
 
-import java.util.Random;
 import java.util.Scanner;
 
-public class Main {
-    public static int dims;
+public class ProgGame {
     private static final String ANSI_RESET = "\u001B[0m";
     public static String playerSym = null;
-    public static void main(String[] args) {
-        Board board = new Board(dims);
+    public static void main() {
+        Board board = new Board(3);
         Player[] players = new Player[2];
 
         players[0] = new Player("X"); // change later
         players[1] = new Player("O"); // change later
 
         int foundWinner = 0;
-
-        mainMenu(players, board);
 
         board.printBoard();
 
@@ -44,6 +40,12 @@ public class Main {
             }
             else //Player 2
             {
+
+                if (board.getDims()<5){
+                    board.setDimensions(board.getDims()+1);
+                }else{
+                    board.setDimensions(4);
+                }
                 playerSym="O";
                 if(runTurn("Player 2 turn", board, players[1]) == true) {
                     foundWinner = 1;
@@ -68,54 +70,6 @@ public class Main {
 
     }
 
-    public static void mainMenu(Player [] players, Board board) {
-        System.out.println("Welcome to Tic Tac Toe.");
-        //boardMenu(board);
-
-        //Random rng = new Random();
-        //int num1 = rng.nextInt(10) + 1;
-        //System.out.println(num1);
-
-        System.out.println("Choose a game mode.");
-        System.out.println("1 - Player VS Player");
-        System.out.println("2 - Player VS Computer");
-        System.out.println("3 - Computer VS Computer");
-//        System.out.println("4 - Progressively Larger Game Board");
-        Scanner scannyboi = new Scanner(System.in);
-        System.out.println("Mode:");
-        int modeinput = scannyboi.nextInt();
-        if(modeinput > 0 && modeinput < 4) {
-            switch (modeinput) {
-                case 1:
-                    dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.\n", 10, 3);
-                    board.setDimensions(dims);
-                    chooseColour(players, 2);
-                    break;
-                case 2:
-                    dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.\n", 10, 3);
-                    board.setDimensions(dims);
-                    chooseColour(players, 1);
-
-                    PlayerVComp runner = new PlayerVComp();
-                    runner.main();
-                    System.out.println("Game is over! Exiting app...");
-                    System.exit(1);
-                    break;
-                case 3:
-                    dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.\n", 10, 3);
-                    board.setDimensions(dims);
-                    CompVComp compRunner = new CompVComp();
-                    compRunner.main();
-                    System.out.println("Game is over! Exiting app...");
-                    System.exit(1);
-                    break;
-//                case 4:
-//                    ProgGame.main();
-//                    break;
-            }
-        }
-    }
-
     public static boolean runTurn(String prompt, Board board, Player player) {
         System.out.println(prompt);
 
@@ -134,11 +88,6 @@ public class Main {
         board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
         //return board.checkHit(player.getMarker());
         return board.checkHit(row, col);
-    }
-
-    public static void boardMenu(Board board) {
-        dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.", 10, 3);
-        board.setDimensions(dims);
     }
 
     public static void chooseColour(Player[] players, int times) {
@@ -255,25 +204,4 @@ public class Main {
             return num;
         }
     }
-
-
-//    public static boolean getWinner(String turnPrompt, Board board, Player player) {
-//        System.out.println(turnPrompt);
-//        int row=0, col=0;
-//        while(true)
-//        {
-//            row = getValidInt("Enter row: ", board.getDims(), 0);
-//            col = getValidInt("Enter col: ", board.getDims(), 0);
-//            if(board.isFree(row,col))
-//            {
-//                break;
-//            }
-//            System.out.printf("[%d,%d] is already filled!\n",row,col);
-//        }
-//        board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
-//        //return board.checkHit(player.getMarker());
-//        return board.checkHit(row);
-//    }
 }
-
-

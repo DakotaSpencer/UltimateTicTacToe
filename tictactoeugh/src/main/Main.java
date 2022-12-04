@@ -30,6 +30,7 @@ public class Main {
                 playerSym="X";
                 if(runTurn("Player 1 turn", board, players[0]) == true) {
                     foundWinner = 1;
+                    board.printBoard();
                     System.out.println("Player 1 WINS!");
                     break;
                 }
@@ -47,6 +48,7 @@ public class Main {
                 playerSym="O";
                 if(runTurn("Player 2 turn", board, players[1]) == true) {
                     foundWinner = 1;
+                    board.printBoard();
                     System.out.println("Player 2 WINS!");
                     break;
                 }

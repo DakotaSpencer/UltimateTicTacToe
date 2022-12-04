@@ -35,6 +35,7 @@ public class CompVComp {
                 if(getWinner("Player 1 turn", board, players[0]))
                 {
                     foundWinner=1;
+                    board.printBoard();
                     System.out.println("Player 1 WINS!");
                     break;
                 }
@@ -46,6 +47,7 @@ public class CompVComp {
                 if(getWinner("Player 2 turn", board, players[1]))
                 {
                     foundWinner=1;
+                    board.printBoard();
                     System.out.println("Player 2 WINS!");
                     break;
                 }

@@ -28,24 +28,34 @@ public class Main {
             if(i%2==0) //Player 1
             {
                 playerSym="X";
-                if(getWinner("Player 1 turn", board, players[0]))
-                {
-                    foundWinner=1;
+                if(runTurn("Player 1 turn", board, players[0]) == true) {
+                    foundWinner = 1;
                     System.out.println("Player 1 WINS!");
                     break;
                 }
+//                if(getWinner("Player 1 turn", board, players[0]))
+//                {
+//                    foundWinner=1;
+//                    System.out.println("Player 1 WINS!");
+//                    break;
+//                }
                 board.printBoard();
                 System.out.println();
             }
             else //Player 2
             {
                 playerSym="O";
-                if(getWinner("Player 2 turn", board, players[1]))
-                {
-                    foundWinner=1;
+                if(runTurn("Player 2 turn", board, players[1]) == true) {
+                    foundWinner = 1;
                     System.out.println("Player 2 WINS!");
                     break;
                 }
+//                if(getWinner("Player 2 turn", board, players[1]))
+//                {
+//                    foundWinner=1;
+//                    System.out.println("Player 2 WINS!");
+//                    break;
+//                }
                 board.printBoard();
                 System.out.println();
             }
@@ -93,6 +103,26 @@ public class Main {
                     break;
             }
         }
+    }
+
+    public static boolean runTurn(String prompt, Board board, Player player) {
+        System.out.println(prompt);
+
+        int row=0, col=0;
+        while(true)
+        {
+            row = getValidInt("Enter row: ", board.getDims(), 0);
+            col = getValidInt("Enter col: ", board.getDims(), 0);
+            if(board.isFree(row,col))
+            {
+                break;
+            }
+            System.out.printf("[%d,%d] is already filled!\n",row,col);
+        }
+
+        board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
+        //return board.checkHit(player.getMarker());
+        return board.checkHit(row, col);
     }
 
     public static void boardMenu(Board board) {
@@ -216,23 +246,23 @@ public class Main {
     }
 
 
-    public static boolean getWinner(String turnPrompt, Board board, Player player) {
-        System.out.println(turnPrompt);
-        int row=0, col=0;
-        while(true)
-        {
-            row = getValidInt("Enter row: ", board.getDims(), 0);
-            col = getValidInt("Enter col: ", board.getDims(), 0);
-            if(board.isFree(row,col))
-            {
-                break;
-            }
-            System.out.printf("[%d,%d] is already filled!\n",row,col);
-        }
-        board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
-        //return board.checkHit(player.getMarker());
-        return board.checkHit();
-    }
+//    public static boolean getWinner(String turnPrompt, Board board, Player player) {
+//        System.out.println(turnPrompt);
+//        int row=0, col=0;
+//        while(true)
+//        {
+//            row = getValidInt("Enter row: ", board.getDims(), 0);
+//            col = getValidInt("Enter col: ", board.getDims(), 0);
+//            if(board.isFree(row,col))
+//            {
+//                break;
+//            }
+//            System.out.printf("[%d,%d] is already filled!\n",row,col);
+//        }
+//        board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
+//        //return board.checkHit(player.getMarker());
+//        return board.checkHit(row);
+//    }
 }
 
 

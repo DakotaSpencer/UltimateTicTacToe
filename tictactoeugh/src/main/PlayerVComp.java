@@ -120,6 +120,6 @@ public class PlayerVComp {
         }
         board.setGridSquare(row,col,player.getColour() + player.getMarker() + ANSI_RESET);
         //return board.checkHit(player.getMarker());
-        return board.checkHit();
+        return board.checkHit(row, col);
     }
 }

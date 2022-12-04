@@ -157,6 +157,10 @@ public class Board {
         return Dimensions;
     }
 
+    public String[][] getGrid() {
+        return Grid;
+    }
+
     public void setGridSquare(int row, int col, String set) {
         Grid[row][col] = set;
     }

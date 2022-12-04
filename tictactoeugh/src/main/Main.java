@@ -8,7 +8,7 @@ public class Main {
     private static final String ANSI_RESET = "\u001B[0m";
     public static String playerSym = null;
     public static void main(String[] args) {
-        Board board = new Board(dims);
+        Board board = new Board(3);
         Player[] players = new Player[2];
 
         players[0] = new Player("X"); // change later
@@ -22,7 +22,6 @@ public class Main {
 
         int i=0;
         while(i<board.getDims()*board.getDims())
-        //while(i<9)
         {
             if(i%2==0) //Player 1
             {
@@ -80,11 +79,11 @@ public class Main {
         System.out.println("1 - Player VS Player");
         System.out.println("2 - Player VS Computer");
         System.out.println("3 - Computer VS Computer");
-//        System.out.println("4 - Progressively Larger Game Board");
+        System.out.println("4 - Progressively Larger Game Board");
         Scanner scannyboi = new Scanner(System.in);
         System.out.println("Mode:");
         int modeinput = scannyboi.nextInt();
-        if(modeinput > 0 && modeinput < 4) {
+        if(modeinput > 0 && modeinput < 5) {
             switch (modeinput) {
                 case 1:
                     dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.\n", 10, 3);
@@ -109,9 +108,10 @@ public class Main {
                     System.out.println("Game is over! Exiting app...");
                     System.exit(1);
                     break;
-//                case 4:
-//                    ProgGame.main();
-//                    break;
+                case 4:
+                    chooseColour(players, 2);
+                    ProgGame.main(board, players);
+                    break;
             }
         }
     }

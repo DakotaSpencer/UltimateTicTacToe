@@ -5,19 +5,14 @@ import java.util.Scanner;
 public class ProgGame {
     private static final String ANSI_RESET = "\u001B[0m";
     public static String playerSym = null;
-    public static void main() {
-        Board board = new Board(3);
-        Player[] players = new Player[2];
-
-        players[0] = new Player("X"); // change later
-        players[1] = new Player("O"); // change later
-
+    public static void main(Board board, Player[] players) {
+        board.setDimensions(3);
         int foundWinner = 0;
 
         board.printBoard();
 
         int i=0;
-        while(i<board.getDims()*board.getDims())
+        while(i<board.getDims()*board.getDims() && foundWinner == 0)
         //while(i<9)
         {
             if(i%2==0) //Player 1
@@ -42,10 +37,16 @@ public class ProgGame {
             {
 
                 if (board.getDims()<5){
+                    String[][] tempGrid = board.getGrid();
                     board.setDimensions(board.getDims()+1);
-                }else{
-                    board.setDimensions(4);
+
+                    for(int k = 0; k < tempGrid.length; k++) {
+                        for(int j = 0; j < tempGrid.length; j++) {
+                            board.setGridSquare(k, j, tempGrid[k][j]);
+                        }
+                    }
                 }
+
                 playerSym="O";
                 if(runTurn("Player 2 turn", board, players[1]) == true) {
                     foundWinner = 1;

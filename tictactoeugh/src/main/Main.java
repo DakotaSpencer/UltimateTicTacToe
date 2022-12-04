@@ -26,10 +26,11 @@ public class Main {
             if(i%2==0) //Player 1
             {
                 playerSym="X";
-                if(runTurn("Player 1 turn", board, players[0]) == true) {
+                if(runTurn("Player " +players[0].getColour() + "1" + ANSI_RESET + " turn", board, players[0]) == true) {
                     foundWinner = 1;
                     board.printBoard();
-                    System.out.println("Player 1 WINS!");
+                    System.out.println("Player " +players[0].getColour() + "1" + ANSI_RESET + " WINS!");
+                    System.exit(1);
                     break;
                 }
 //                if(getWinner("Player 1 turn", board, players[0]))
@@ -44,10 +45,11 @@ public class Main {
             else //Player 2
             {
                 playerSym="O";
-                if(runTurn("Player 2 turn", board, players[1]) == true) {
+                if(runTurn("Player " +players[1].getColour() + "2" + ANSI_RESET + " turn", board, players[1]) == true) {
                     foundWinner = 1;
                     board.printBoard();
-                    System.out.println("Player 2 WINS!");
+                    System.out.println("Player " +players[1].getColour() + "2" + ANSI_RESET + " WINS!");
+                    System.exit(1);
                     break;
                 }
 //                if(getWinner("Player 2 turn", board, players[1]))
@@ -64,6 +66,7 @@ public class Main {
 
         if(foundWinner == 0)
             System.out.println("It's a draw!");
+            System.exit(1);
 
     }
 
@@ -80,10 +83,11 @@ public class Main {
         System.out.println("2 - Player VS Computer");
         System.out.println("3 - Computer VS Computer");
         System.out.println("4 - Progressively Larger Game Board");
+        System.out.println("5 - Marathon Mode");
         Scanner scannyboi = new Scanner(System.in);
         System.out.println("Mode:");
         int modeinput = scannyboi.nextInt();
-        if(modeinput > 0 && modeinput < 5) {
+        if(modeinput > 0 && modeinput < 6) {
             switch (modeinput) {
                 case 1:
                     dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.\n", 10, 3);
@@ -111,6 +115,14 @@ public class Main {
                 case 4:
                     chooseColour(players, 2);
                     ProgGame.main(board, players);
+                    break;
+                case 5:
+                    dims = 3;
+                    board.setDimensions(dims);
+                    Marathon marathonRunner = new Marathon();
+                    Marathon.main();
+                    System.out.println("Game is over! Exiting app...");
+                    System.exit(1);
                     break;
             }
         }

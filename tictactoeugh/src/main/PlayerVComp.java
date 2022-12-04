@@ -33,11 +33,12 @@ public class PlayerVComp {
         {
             if(i%2==0) //Player 1
             {
-                if(getWinner("Player 1 turn", board, players[0]))
+                if(getWinner("Player " +players[0].getColour() + "1" + ANSI_RESET + " turn", board, players[0]))
                 {
                     foundWinner=1;
                     board.printBoard();
-                    System.out.println("Player 1 WINS!");
+                    System.out.println("Player " +players[0].getColour() + "1" + ANSI_RESET + " WINS!");
+                    System.exit(1);
                     break;
                 }
                 board.printBoard();
@@ -46,11 +47,12 @@ public class PlayerVComp {
             }
             else //Player 2
             {
-                if(getWinner("COMPUTER turn", board, players[1]))
+                if(getWinner(players[1].getColour() + "COMPUTER" + ANSI_RESET + " turn", board, players[1]))
                 {
                     foundWinner=1;
                     board.printBoard();
-                    System.out.println("Player 2 WINS!");
+                    System.out.println(players[1].getColour() + "COMPUTER" + ANSI_RESET + " WINS");
+                    System.exit(1);
                     break;
                 }
                 board.printBoard();
@@ -62,14 +64,15 @@ public class PlayerVComp {
 
         if(foundWinner == 0)
             System.out.println("It's a draw!");
+            System.exit(1);
     }
 
     public static void colorMenu(Player [] players) {
-        System.out.println("TEST PLAYER V COMP");
-        System.out.println("PLAYER VS COMPUTER");
-
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_BLUE = "\u001B[34m";
+        System.out.println(ANSI_RED + "PLAYER " +ANSI_RESET + "VS" + ANSI_BLUE + " COMPUTER" + ANSI_RESET);
+
+
         players[0].setColour(ANSI_RED);
         players[1].setColour(ANSI_BLUE);
     }

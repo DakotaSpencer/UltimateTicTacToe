@@ -1,11 +1,20 @@
 package main;
 
+import java.util.Random;
+
 public class Board {
     private int Dimensions;
     private String[][] Grid;
 
     public Board(int dimensions) {
         setDimensions(dimensions);
+    }
+
+    public static int rng(int bound){
+        Random rng = new Random();
+        int num1 = rng.nextInt(bound);
+        System.out.println(num1);
+        return num1;
     }
 
     public void printBoard() {
@@ -16,7 +25,7 @@ public class Board {
             for (int j = 0; j < Dimensions; j++) {
                 if (Grid[i][j] == null){
                     System.out.print("-" + " | ");
-                }else {
+                } else {
                     System.out.print(Grid[i][j] + " | ");
                 }
             }
@@ -163,5 +172,34 @@ public class Board {
 
     public void setGridSquare(int row, int col, String set) {
         Grid[row][col] = set;
+    }
+
+    public void blockRandomSpace() {
+        int empty = 0;
+        
+        for(int a = 0; a < Dimensions; a++) {
+            for(int b = 0; b < Dimensions; b++) {
+                if(Grid[a][b] == null) empty++;
+            }
+        }
+        
+        int empty2 = 0;
+        int block = rng(empty);
+        for(int a = 0; a < Dimensions; a++) {
+            for(int b = 0; b < Dimensions; b++) {
+                if(Grid[a][b] == null) empty2++;
+                if(empty2 == block && isFree(a, b)) setGridSquare(a, b, "!");
+            }
+        }
+    }
+
+    public void removeBlock() {
+        for(int a = 0; a < Dimensions; a++) {
+            for(int b = 0; b < Dimensions; b++) {
+                if(Grid[a][b] == "!") {
+                    setGridSquare(a, b, null);
+                }
+            }
+        }
     }
 }

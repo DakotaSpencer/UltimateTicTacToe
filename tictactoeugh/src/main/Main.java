@@ -7,6 +7,8 @@ public class Main {
     public static int dims;
     private static final String ANSI_RESET = "\u001B[0m";
     public static String playerSym = null;
+    public static Boolean blockingActive = false;
+
     public static void main(String[] args) {
         Board board = new Board(3);
         Player[] players = new Player[2];
@@ -18,13 +20,16 @@ public class Main {
 
         mainMenu(players, board);
 
-        board.printBoard();
-
         int i=0;
         while(i<board.getDims()*board.getDims())
         {
+            if(blockingActive) {
+                board.blockRandomSpace();
+            }
+
             if(i%2==0) //Player 1
             {
+                board.printBoard();
                 playerSym="X";
                 if(runTurn("Player " +players[0].getColour() + "1" + ANSI_RESET + " turn", board, players[0]) == true) {
                     foundWinner = 1;
@@ -39,11 +44,11 @@ public class Main {
 //                    System.out.println("Player 1 WINS!");
 //                    break;
 //                }
-                board.printBoard();
                 System.out.println();
             }
             else //Player 2
             {
+                board.printBoard();
                 playerSym="O";
                 if(runTurn("Player " +players[1].getColour() + "2" + ANSI_RESET + " turn", board, players[1]) == true) {
                     foundWinner = 1;
@@ -58,9 +63,13 @@ public class Main {
 //                    System.out.println("Player 2 WINS!");
 //                    break;
 //                }
-                board.printBoard();
                 System.out.println();
             }
+
+            if(blockingActive) {
+                board.removeBlock();
+            }
+
             i++;
         }
 
@@ -84,10 +93,11 @@ public class Main {
         System.out.println("3 - Computer VS Computer");
         System.out.println("4 - Progressively Larger Game Board");
         System.out.println("5 - Marathon Mode");
+        System.out.println("6 - Blocking Mode");
         Scanner scannyboi = new Scanner(System.in);
         System.out.println("Mode:");
         int modeinput = scannyboi.nextInt();
-        if(modeinput > 0 && modeinput < 6) {
+        if(modeinput > 0 && modeinput < 7) {
             switch (modeinput) {
                 case 1:
                     dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10.\n", 10, 3);
@@ -124,6 +134,12 @@ public class Main {
                     System.out.println("Game is over! Exiting app...");
                     System.exit(1);
                     break;
+                case 6:
+                    dims = getValidInt("Please choose how many rows and columns your board has, between 3 and 10. \n", 10, 3);
+                    board.setDimensions(dims);
+                    chooseColour(players, 2);
+                    blockingActive = true;
+                    break;    
             }
         }
     }

@@ -197,9 +197,12 @@ public class Board {
     }
 
     public void removeBlock() {
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_RESET = "\u001B[0m";
+
         for(int a = 0; a < Dimensions; a++) {
             for(int b = 0; b < Dimensions; b++) {
-                if(Grid[a][b] == "!") {
+                if(Grid[a][b] == ANSI_RED + "!" + ANSI_RESET) {
                     setGridSquare(a, b, null);
                 }
             }

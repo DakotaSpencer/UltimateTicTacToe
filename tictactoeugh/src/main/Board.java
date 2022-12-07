@@ -175,6 +175,8 @@ public class Board {
     }
 
     public void blockRandomSpace() {
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_RESET = "\u001B[0m";
         int empty = 0;
         
         for(int a = 0; a < Dimensions; a++) {
@@ -188,7 +190,8 @@ public class Board {
         for(int a = 0; a < Dimensions; a++) {
             for(int b = 0; b < Dimensions; b++) {
                 if(Grid[a][b] == null) empty2++;
-                if(empty2 == block && isFree(a, b)) setGridSquare(a, b, "!");
+
+                if(empty2 == block && isFree(a, b)) setGridSquare(a, b, ANSI_RED + "!" + ANSI_RESET);
             }
         }
     }
